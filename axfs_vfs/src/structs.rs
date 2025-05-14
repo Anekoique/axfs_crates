@@ -323,12 +323,12 @@ impl VfsDirEntry {
 /// File timestamps
 #[derive(Debug, Clone, Copy, Default)]
 pub struct VfsNodeTimes {
-    atime_sec: u64,
-    atime_nsec: u64,
-    mtime_sec: u64,
-    mtime_nsec: u64,
-    ctime_sec: u64,
-    ctime_nsec: u64,
+    pub atime_sec: u64,
+    pub atime_nsec: u64,
+    pub mtime_sec: u64,
+    pub mtime_nsec: u64,
+    pub ctime_sec: u64,
+    pub ctime_nsec: u64,
 }
 
 impl VfsNodeTimes {
