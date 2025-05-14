@@ -44,9 +44,11 @@ mod structs;
 pub mod path;
 
 use alloc::sync::Arc;
-use axerrno::{ax_err, AxError, AxResult};
+use axerrno::{AxError, AxResult, ax_err};
 
-pub use self::structs::{FileSystemInfo, VfsDirEntry, VfsNodeAttr, VfsNodePerm, VfsNodeType};
+pub use self::structs::{
+    FileSystemInfo, VfsDirEntry, VfsNodeAttr, VfsNodePerm, VfsNodeTimes, VfsNodeType,
+};
 
 /// A wrapper of [`Arc<dyn VfsNodeOps>`].
 pub type VfsNodeRef = Arc<dyn VfsNodeOps>;

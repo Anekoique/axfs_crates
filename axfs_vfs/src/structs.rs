@@ -321,7 +321,7 @@ impl VfsDirEntry {
 }
 
 /// File timestamps
-#[derive(Debug, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy)]
 pub struct VfsNodeTimes {
     atime_sec: u64,
     atime_nsec: u64,
@@ -329,6 +329,19 @@ pub struct VfsNodeTimes {
     mtime_nsec: u64,
     ctime_sec: u64,
     ctime_nsec: u64,
+}
+
+impl Default for VfsNodeTimes {
+    const fn default() -> Self {
+        Self {
+            atime_sec: 0,
+            atime_nsec: 0,
+            mtime_sec: 0,
+            mtime_nsec: 0,
+            ctime_sec: 0,
+            ctime_nsec: 0,
+        }
+    }
 }
 
 impl VfsNodeTimes {
