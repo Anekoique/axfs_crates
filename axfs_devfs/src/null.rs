@@ -1,4 +1,4 @@
-use axfs_vfs::{VfsNodeAttr, VfsNodeOps, VfsNodePerm, VfsNodeType, VfsResult};
+use axfs_vfs::{VfsNodeAttr, VfsNodeOps, VfsNodePerm, VfsNodeTimes, VfsNodeType, VfsResult};
 
 /// A null device behaves like `/dev/null`.
 ///
@@ -12,6 +12,7 @@ impl VfsNodeOps for NullDev {
             VfsNodeType::CharDevice,
             0,
             0,
+            VfsNodeTimes::default(),
         ))
     }
 

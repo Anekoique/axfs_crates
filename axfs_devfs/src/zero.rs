@@ -1,4 +1,4 @@
-use axfs_vfs::{VfsNodeAttr, VfsNodeOps, VfsNodePerm, VfsNodeType, VfsResult};
+use axfs_vfs::{VfsNodeAttr, VfsNodeOps, VfsNodePerm, VfsNodeTimes, VfsNodeType, VfsResult};
 
 /// A zero device behaves like `/dev/zero`.
 ///
@@ -12,6 +12,7 @@ impl VfsNodeOps for ZeroDev {
             VfsNodeType::CharDevice,
             0,
             0,
+            VfsNodeTimes::default(),
         ))
     }
 
