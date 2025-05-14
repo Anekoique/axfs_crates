@@ -16,6 +16,8 @@ pub struct VfsNodeAttr {
     size: u64,
     /// Number of 512B blocks allocated.
     blocks: u64,
+    /// File timestamps
+    times: VfsNodeTimes,
 }
 
 bitflags::bitflags! {
@@ -199,12 +201,19 @@ impl VfsNodeType {
 impl VfsNodeAttr {
     /// Creates a new `VfsNodeAttr` with the given permission mode, type, size
     /// and number of blocks.
-    pub const fn new(mode: VfsNodePerm, ty: VfsNodeType, size: u64, blocks: u64) -> Self {
+    pub const fn new(
+        mode: VfsNodePerm,
+        ty: VfsNodeType,
+        size: u64,
+        blocks: u64,
+        times: VfsNodeTimes,
+    ) -> Self {
         Self {
             mode,
             ty,
             size,
             blocks,
+            times,
         }
     }
 
@@ -215,6 +224,7 @@ impl VfsNodeAttr {
             ty: VfsNodeType::File,
             size,
             blocks,
+            times: VfsNodeTimes::default(),
         }
     }
 
@@ -226,6 +236,7 @@ impl VfsNodeAttr {
             ty: VfsNodeType::Dir,
             size,
             blocks,
+            times: VfsNodeTimes::default(),
         }
     }
 
@@ -242,6 +253,11 @@ impl VfsNodeAttr {
     /// Returns the permission of the node.
     pub const fn perm(&self) -> VfsNodePerm {
         self.mode
+    }
+
+    /// Returns the timestamps of the node.
+    pub const fn times(&self) -> VfsNodeTimes {
+        self.times
     }
 
     /// Sets the permission of the node.
@@ -301,5 +317,36 @@ impl VfsDirEntry {
             .position(|&c| c == 0)
             .unwrap_or(self.d_name.len());
         &self.d_name[..len]
+    }
+}
+
+/// File timestamps
+#[derive(Debug, Clone, Copy, Default)]
+pub struct VfsNodeTimes {
+    atime_sec: u64,
+    atime_nsec: u64,
+    mtime_sec: u64,
+    mtime_nsec: u64,
+    ctime_sec: u64,
+    ctime_nsec: u64,
+}
+
+impl VfsNodeTimes {
+    pub fn new(
+        atime_sec: u64,
+        atime_nsec: u64,
+        mtime_sec: u64,
+        mtime_nsec: u64,
+        ctime_sec: u64,
+        ctime_nsec: u64,
+    ) -> Self {
+        Self {
+            atime_sec,
+            atime_nsec,
+            mtime_sec,
+            mtime_nsec,
+            ctime_sec,
+            ctime_nsec,
+        }
     }
 }
