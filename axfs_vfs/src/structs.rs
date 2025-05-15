@@ -330,7 +330,10 @@ bitflags::bitflags! {
         const ATIME_NSEC = 0b1000;
         const MTIME_NSEC = 0b10000;
         const CTIME_NSEC = 0b100000;
-        const ALL;
+        const ALL = Self::ATIME | Self::MTIME | Self::CTIME
+            | Self::ATIME_NSEC
+            | Self::MTIME_NSEC
+            | Self::CTIME_NSEC;
     }
 }
 
