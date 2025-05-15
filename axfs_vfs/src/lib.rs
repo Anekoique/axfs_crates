@@ -47,7 +47,7 @@ use alloc::sync::Arc;
 use axerrno::{AxError, AxResult, ax_err};
 
 pub use self::structs::{
-    FileSystemInfo, VfsDirEntry, VfsNodeAttr, VfsNodePerm, VfsNodeTimes, VfsNodeType,
+    FileSystemInfo, VfsDirEntry, VfsNodeAttr, VfsNodePerm, VfsNodeTimes, VfsNodeType, TimesMask
 };
 
 /// A wrapper of [`Arc<dyn VfsNodeOps>`].
@@ -172,7 +172,7 @@ pub trait VfsNodeOps: Send + Sync {
     }
     
     /// Set the timestamp of the node.
-    fn set_times(&self, _times: VfsNodeTimes) -> VfsResult {
+    fn set_times(&self, _times: VfsNodeTimes, _flags: TimesMask) -> VfsResult {
         ax_err!(Unsupported)
     }
 }

@@ -320,6 +320,20 @@ impl VfsDirEntry {
     }
 }
 
+/// The mask for the file timestamps.
+bitflags::bitflags! {
+    #[derive(Debug, Clone, Copy)]
+    pub struct TimesMask: u8 {
+        const ATIME = 0b1;
+        const MTIME = 0b10;
+        const CTIME = 0b100;
+        const ATIME_NSEC = 0b1000;
+        const MTIME_NSEC = 0b10000;
+        const CTIME_NSEC = 0b100000;
+        const ALL
+    }
+}
+
 /// File timestamps
 #[derive(Debug, Clone, Copy, Default)]
 pub struct VfsNodeTimes {
