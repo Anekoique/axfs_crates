@@ -170,6 +170,11 @@ pub trait VfsNodeOps: Send + Sync {
     fn as_any(&self) -> &dyn core::any::Any {
         unimplemented!()
     }
+    
+    /// Set the timestamp of the node.
+    fn set_times(&self, _times: VfsNodeTimes) -> VfsResult {
+        ax_err!(Unsupported)
+    }
 }
 
 #[doc(hidden)]
